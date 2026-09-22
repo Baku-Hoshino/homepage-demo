@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="一页简洁的个人学习主页，记录数据分析、人工智能与网页实践。">
+  <title>我的个人主页 · 学习与实践</title>
+  <style>
+    :root {
+      --ink: #15243a;
+      --muted: #5d6b7d;
+      --paper: #fffdf8;
+      --blue: #2764ff;
+      --mint: #67d8bd;
+      --coral: #ff8066;
+      --line: rgba(21, 36, 58, .12);
+      --shadow: 0 22px 70px rgba(32, 58, 92, .13);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(103, 216, 189, .28), transparent 29rem),
+        radial-gradient(circle at 98% 12%, rgba(39, 100, 255, .16), transparent 30rem),
+        var(--paper);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; }
+    .shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+    }
+    .brand { font-weight: 800; letter-spacing: -.02em; text-decoration: none; }
+    .brand span { color: var(--blue); }
+    .nav-links { display: flex; gap: 22px; }
+    .nav-links a { color: var(--muted); font-size: 14px; text-decoration: none; }
+    .nav-links a:hover { color: var(--blue); }
+
+    .hero {
+      min-height: 70vh;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: center;
+      gap: 52px;
+      padding: 70px 0 96px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.7);
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 5px rgba(103,216,189,.18); }
+    h1 {
+      max-width: 760px;
+      margin: 22px 0 20px;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 1.06;
+      letter-spacing: -.055em;
+    }
+    h1 em { color: var(--blue); font-style: normal; }
+    .lead { max-width: 670px; margin: 0; color: var(--muted); font-size: 18px; }
+    .actions { display: flex; gap: 12px; margin-top: 30px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border: 1px solid var(--ink);
+      border-radius: 13px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(21,36,58,.14); }
+    .button.primary { color: white; background: var(--ink); }
+    .button.ghost { border-color: var(--line); background: rgba(255,255,255,.7); }
+
+    .orbit {
+      position: relative;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255,255,255,.6);
+      box-shadow: var(--shadow);
+    }
+    .orbit::before, .orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px dashed rgba(39,100,255,.3);
+      border-radius: 50%;
+      inset: 13%;
+    }
+    .orbit::after { inset: 30%; border-style: solid; border-color: rgba(255,128,102,.3); }
+    .monogram {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 38%;
+      aspect-ratio: 1;
+      border-radius: 31% 69% 54% 46% / 43% 42% 58% 57%;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), #7548ff);
+      font-size: clamp(34px, 6vw, 64px);
+      font-weight: 900;
+      box-shadow: 0 20px 45px rgba(39,100,255,.3);
+    }
+
+    section { padding: 82px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 32px; }
+    .kicker { margin: 0 0 7px; color: var(--blue); font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.15; letter-spacing: -.035em; }
+    .section-head > p { max-width: 480px; margin: 0; color: var(--muted); }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      min-height: 260px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 12px 36px rgba(32,58,92,.07);
+    }
+    .card-number { color: var(--coral); font-size: 13px; font-weight: 850; letter-spacing: .08em; }
+    .card h3 { margin: 38px 0 10px; font-size: 23px; letter-spacing: -.025em; }
+    .card p { margin: 0; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .tag { padding: 6px 10px; border-radius: 999px; color: #35506f; background: #edf3ff; font-size: 12px; font-weight: 700; }
+
+    .now {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 28px;
+      padding: 38px;
+      border-radius: 26px;
+      color: white;
+      background: var(--ink);
+      box-shadow: var(--shadow);
+    }
+    .now p { color: rgba(255,255,255,.72); }
+    .list { display: grid; gap: 12px; }
+    .list div { padding: 15px 18px; border: 1px solid rgba(255,255,255,.13); border-radius: 14px; background: rgba(255,255,255,.06); }
+
+    footer { display: flex; justify-content: space-between; gap: 20px; padding: 34px 0 46px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 780px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 45px 0 70px; }
+      .orbit { width: min(82vw, 350px); justify-self: center; }
+      .grid { grid-template-columns: 1fr; }
+      .section-head, .now { display: grid; grid-template-columns: 1fr; }
+      .section-head { align-items: start; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <nav aria-label="主导航">
+      <a class="brand" href="#top">home<span>page</span>.</a>
+      <div class="nav-links">
+        <a href="#about">关于</a>
+        <a href="#projects">项目</a>
+        <a href="#now">近况</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero shell">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> 欢迎来到我的数字主页</span>
+        <h1>从好奇出发，<br>用<em>数据与代码</em>回答问题。</h1>
+        <p class="lead">我正在学习人工智能、数据分析与网页开发。这里记录我对真实问题的拆解、探索和实践，也保存每一次从“不会”到“做出来”的过程。</p>
+        <div class="actions">
+          <a class="button primary" href="#projects">浏览项目 ↓</a>
+          <a class="button ghost" href="#about">认识我</a>
+        </div>
+      </div>
+      <div class="orbit" aria-hidden="true"><div class="monogram">AI</div></div>
+    </div>
+
+    <section id="about">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="kicker">About</p><h2>边学习，边创造</h2></div>
+          <p>我关注技术如何帮助人理解复杂世界：先提出清晰的问题，再寻找可靠的数据，最后把结论讲得简单、诚实、可验证。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="kicker">Projects</p><h2>正在积累的实践</h2></div>
+          <p>以下是我的三个学习方向。它们会随着课程推进持续更新，也将成为后续作业的展示空间。</p>
+        </div>
+        <div class="grid">
+          <article class="card"><span class="card-number">01 / DATA</span><h3>数据观察</h3><p>从公开数据中寻找变化与联系，通过清洗、统计和可视化，让数字转化为可读的信息。</p><div class="tags"><span class="tag">Python</span><span class="tag">Visualization</span></div></article>
+          <article class="card"><span class="card-number">02 / AI</span><h3>智能应用</h3><p>理解生成式人工智能的能力边界，尝试把模型用于研究、写作和日常任务的真实流程。</p><div class="tags"><span class="tag">AI</span><span class="tag">Prompting</span></div></article>
+          <article class="card"><span class="card-number">03 / WEB</span><h3>网页表达</h3><p>用清晰的结构、友好的交互和克制的视觉语言，把思考变成任何人都能访问的作品。</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="now">
+      <div class="shell">
+        <div class="now">
+          <div><p class="kicker" style="color:var(--mint)">Now</p><h2>此刻，我在做什么？</h2><p>把课程中的方法变成真正可运行、可分享、可继续迭代的小项目。</p></div>
+          <div class="list"><div>✓ 建立第一个公开代码仓库</div><div>✓ 发布一个公网可访问的个人网页</div><div>→ 继续学习数据分析与智能工具</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell"><span>© 2026 · 我的个人主页</span><span>保持好奇，持续构建。</span></footer>
+</body>
+</html>
